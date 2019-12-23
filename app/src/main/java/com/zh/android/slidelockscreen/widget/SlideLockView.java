@@ -27,7 +27,14 @@ public class SlideLockView extends FrameLayout {
      * 拽托帮助类
      */
     private ViewDragHelper mViewDragHelper;
+    /**
+     * 回调
+     */
     private Callback mCallback;
+    /**
+     * 是否解锁
+     */
+    private boolean isUnlock = false;
 
     public SlideLockView(@NonNull Context context) {
         this(context, null);
@@ -127,8 +134,14 @@ public class SlideLockView extends FrameLayout {
                 //改动到最右边，解锁完成
                 int dragState = mViewDragHelper.getViewDragState();
                 if (dragState == ViewDragHelper.STATE_SETTLING) {
-                    if (left >= (leftMaxDistance * 0.9f) && mCallback != null) {
-                        mCallback.onUnlock();
+                    if (left >= (leftMaxDistance * 0.9f)) {
+                        //未解锁才进行解锁回调，由于这个判断会进两次，所以做了标志位限制
+                        if (!isUnlock) {
+                            isUnlock = true;
+                            if (mCallback != null) {
+                                mCallback.onUnlock();
+                            }
+                        }
                     }
                 }
             }
