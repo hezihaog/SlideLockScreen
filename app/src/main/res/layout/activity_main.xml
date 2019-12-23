@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_lock_screen_bg"
+    tools:context=".MainActivity">
+
+    <com.zh.android.slidelockscreen.widget.SlideLockView
+        android:id="@+id/slide_rail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/app_slide_rail_bg"
+        android:paddingStart="6dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="8dp">
+
+        <com.zh.android.slidelockscreen.widget.ShineTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:gravity="center"
+            android:text="右滑解锁打开应用"
+            android:textColor="@color/app_tip_text"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@id/lock_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/app_lock_btn" />
+    </com.zh.android.slidelockscreen.widget.SlideLockView>
+</FrameLayout>
