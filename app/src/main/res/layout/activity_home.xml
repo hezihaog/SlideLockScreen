@@ -4,11 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <Button
+        android:id="@+id/go_screen_lock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="首页"
+        android:text="跳转到锁屏页面"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 </FrameLayout>
