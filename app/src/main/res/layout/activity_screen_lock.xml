@@ -4,15 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_lock_screen_bg"
-    tools:context=".MainActivity">
+    tools:context=".ScreenLockActivity">
 
     <com.zh.android.slidelockscreen.widget.SlideLockView
         android:id="@+id/slide_rail"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
+        android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="20dp"
         android:background="@drawable/app_slide_rail_bg"
         android:paddingStart="6dp"
