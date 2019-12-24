@@ -51,7 +51,7 @@ public class SlideLockView extends FrameLayout {
 
     private void init(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         final SlideLockView slideRail = this;
-        mViewDragHelper = ViewDragHelper.create(this, 0.7f, new ViewDragHelper.Callback() {
+        mViewDragHelper = ViewDragHelper.create(this, 0.3f, new ViewDragHelper.Callback() {
             private int mTop;
 
             @Override
@@ -110,8 +110,8 @@ public class SlideLockView extends FrameLayout {
                 int lockBtnWidth = mLockBtn.getWidth();
                 int fullWidth = slideRail.getWidth();
                 int halfWidth = fullWidth / 2;
-                //松手位置在小于一半，并且滑动速度小于700，则回到左边
-                if (currentLeft <= halfWidth && xvel < 700) {
+                //松手位置在小于一半，并且滑动速度小于1000，则回到左边
+                if (currentLeft <= halfWidth && xvel < 1000) {
                     mViewDragHelper.settleCapturedViewAt(getPaddingStart(), mTop);
                 } else {
                     //否则去到右边（宽度，减去padding和按钮宽度）
@@ -121,20 +121,17 @@ public class SlideLockView extends FrameLayout {
             }
 
             @Override
-            public void onViewPositionChanged(@NonNull View changedView, int left, int top, int dx, int dy) {
-                super.onViewPositionChanged(changedView, left, top, dx, dy);
-                if (changedView != mLockBtn) {
-                    return;
-                }
-                int lockBtnWidth = changedView.getWidth();
+            public void onViewDragStateChanged(int state) {
+                super.onViewDragStateChanged(state);
+                int lockBtnWidth = mLockBtn.getWidth();
                 //限制左右临界点
                 int fullWidth = slideRail.getWidth();
                 //最多的右边
                 int leftMaxDistance = fullWidth - getPaddingEnd() - lockBtnWidth;
-                //改动到最右边，解锁完成
-                int dragState = mViewDragHelper.getViewDragState();
-                if (dragState == ViewDragHelper.STATE_SETTLING) {
-                    if (left >= (leftMaxDistance * 0.9f)) {
+                int left = mLockBtn.getLeft();
+                if (state == ViewDragHelper.STATE_IDLE) {
+                    //移动到最右边，解锁完成
+                    if (left == leftMaxDistance) {
                         //未解锁才进行解锁回调，由于这个判断会进两次，所以做了标志位限制
                         if (!isUnlock) {
                             isUnlock = true;
