@@ -23,6 +23,7 @@ public class ScreenLockActivity extends AppCompatActivity {
         slideRail.setCallback(new SlideLockView.Callback() {
             @Override
             public void onUnlock() {
+                //解锁，跳转到首页
                 Intent intent = new Intent(ScreenLockActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
